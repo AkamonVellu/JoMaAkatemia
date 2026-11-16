@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Kumppanihankinta 2027 · JoMa B-pojat</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--musta:#141416;--puna:#E2231A;--punateksti:#C41D16;--kulta:#D4A72C;--pohja:#F4F3F0;--kortti:#FBFAF7;--viiva:#E2E0DA;--harmaa:#4A4C52;--vihr:#1F7A43;
+--otsikko:'Anton',Impact,'Arial Narrow',sans-serif;--kapea:'Barlow Condensed','Arial Narrow',sans-serif;--leipa:'Barlow','Segoe UI',Arial,sans-serif}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--pohja);color:var(--musta);font-family:var(--leipa);font-size:17px;line-height:1.55}
+a{color:inherit}
+.leveys{max-width:980px;margin:0 auto;padding:0 20px}
+header.palkki{background:var(--musta);border-bottom:4px solid var(--puna);padding-top:env(safe-area-inset-top,0px)}
+header .leveys{display:flex;align-items:center;justify-content:space-between;height:68px}
+header img{height:46px;width:auto}
+header nav{display:flex;gap:18px;font-family:var(--kapea);font-weight:700;font-size:16px}
+header nav a{color:#c9cbd0;text-decoration:none}
+.hero{background:var(--musta);color:#fff;position:relative;overflow:hidden;padding:56px 0 64px}
+.hero::after{content:"";position:absolute;right:-8%;top:0;bottom:0;width:30%;background:var(--puna);clip-path:polygon(45% 0,100% 0,100% 100%,0 100%)}
+.hero .leveys{position:relative;z-index:1}
+.yla{font-family:var(--kapea);font-weight:700;letter-spacing:2px;text-transform:uppercase;font-size:16px;color:var(--punateksti);margin:0 0 8px}
+.hero .yla{color:var(--kulta)}
+h1{font-family:var(--otsikko);font-weight:400;text-transform:uppercase;font-size:clamp(42px,8vw,76px);line-height:1.1;margin:0 0 16px;max-width:680px}
+.hero p.ingressi{font-size:19px;max-width:600px;color:#e4e5e8;margin:0}
+.luku{display:inline-flex;align-items:baseline;gap:12px;margin-top:26px;background:#fff;color:var(--musta);padding:12px 18px}
+.luku b{font-family:var(--otsikko);font-weight:400;font-size:34px;color:var(--punateksti);white-space:nowrap}
+section{padding:52px 0}
+section.valkoinen{background:#fff}
+h2{font-family:var(--otsikko);font-weight:400;text-transform:uppercase;font-size:clamp(30px,5vw,44px);line-height:1.15;margin:0 0 12px}
+h3{font-family:var(--kapea);font-weight:700;font-size:22px;margin:0 0 6px;line-height:1.2}
+.johdanto{color:var(--harmaa);max-width:680px;margin:0 0 28px}
+.askeleet{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;counter-reset:a}
+.askel{background:var(--kortti);border:1px solid var(--viiva);padding:22px;counter-increment:a}
+.askel::before{content:"0" counter(a);display:block;font-family:var(--otsikko);font-size:40px;line-height:1;color:var(--puna);margin-bottom:8px}
+.askel p{margin:0;color:var(--harmaa);font-size:15.5px}
+.portti{max-width:460px;background:#fff;border:1px solid var(--viiva);border-top:6px solid var(--puna);padding:24px}
+label{display:block;font-weight:700;font-size:15px;margin:14px 0 6px}
+input,select,textarea{width:100%;font:inherit;font-size:17px;padding:12px 14px;border:2px solid #cfcdc6;background:#fff;color:var(--musta);border-radius:0}
+input:focus,select:focus,textarea:focus{outline:3px solid var(--kulta);outline-offset:0;border-color:var(--musta)}
+textarea{min-height:90px;resize:vertical}
+.nappi{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:50px;padding:0 22px;border:0;background:var(--musta);color:#fff;font-family:var(--kapea);font-weight:700;font-size:19px;cursor:pointer;margin-top:18px}
+.nappi.puna{background:var(--puna)}
+.nappi[disabled]{opacity:.5;cursor:wait}
+.haku{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
+.haku input{max-width:420px}
+.selite{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 14px}
+.tila{display:inline-block;font-family:var(--kapea);font-weight:700;font-size:14px;letter-spacing:.5px;padding:3px 10px;white-space:nowrap}
+.t-seura{background:var(--musta);color:#fff}
+.t-sovittu{background:#DFF2E6;color:var(--vihr)}
+.t-neuvottelussa{background:#FDE3E1;color:var(--punateksti)}
+.t-ei{background:#E9E8E3;color:var(--harmaa)}
+.lista{background:#fff;border:1px solid var(--viiva);max-height:520px;overflow:auto}
+.rivi{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px 16px;border-bottom:1px solid var(--viiva)}
+.rivi:last-child{border-bottom:0}
+.rivi .nimi{font-weight:600}
+.rivi small{display:block;color:var(--harmaa);font-size:13.5px}
+.tyhja{padding:22px;color:var(--harmaa)}
+.ryhmaots{font-family:var(--kapea);font-weight:700;font-size:22px;letter-spacing:1px;text-transform:uppercase;margin:26px 0 12px;display:flex;align-items:center;gap:10px}
+.ryhmaots::before{content:"";width:16px;height:16px;background:var(--puna)}
+.paketit{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:14px}
+.paketti{background:#fff;border:1px solid var(--viiva);padding:20px;display:flex;flex-direction:column;gap:6px}
+.paketti .hinta{font-family:var(--otsikko);font-size:26px;color:var(--punateksti);line-height:1.2}
+.paketti p{margin:0;color:var(--harmaa);font-size:15.5px}
+.lomakkeet{display:grid;grid-template-columns:1fr 1fr;gap:20px}
+.lomake{background:#fff;border:1px solid var(--viiva);padding:24px;position:relative}
+.lomake.tumma{border-top:6px solid var(--puna)}
+.lomake p.ohje{margin:0 0 4px;color:var(--harmaa);font-size:15px}
+.kaksi{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.ilmo{margin-top:14px;padding:12px 14px;font-weight:600;display:none}
+.ilmo.ok{display:block;background:#DFF2E6;color:var(--vihr)}
+.ilmo.virhe{display:block;background:#FDE3E1;color:var(--punateksti)}
+.pohja{background:#fff;border:1px solid var(--viiva);padding:22px;white-space:pre-wrap;font-size:16px}
+.vinkit{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:22px}
+.vinkki{background:var(--kortti);border-left:5px solid var(--kulta);padding:16px 18px}
+.vinkki p{margin:0;color:var(--harmaa);font-size:15.5px}
+details{background:#fff;border:1px solid var(--viiva);margin-bottom:8px}
+summary{cursor:pointer;padding:16px 18px;font-weight:700;list-style:none;position:relative;padding-right:44px}
+summary::after{content:"+";position:absolute;right:18px;top:10px;font-family:var(--otsikko);font-size:24px;color:var(--puna)}
+details[open] summary::after{content:"–"}
+details p{margin:0;padding:0 18px 16px;color:var(--harmaa)}
+footer{background:var(--musta);color:#c9cbd0;padding:32px 0 calc(32px + env(safe-area-inset-bottom,0px));border-top:4px solid var(--puna)}
+footer .leveys{display:flex;align-items:center;gap:18px;flex-wrap:wrap}
+footer img{height:56px}
+footer b{display:block;font-family:var(--otsikko);font-weight:400;font-size:22px;color:#fff;text-transform:uppercase}
+footer a{color:#fff}
+[hidden]{display:none!important}
+@media (max-width:820px){.askeleet{grid-template-columns:1fr 1fr}.lomakkeet,.vinkit{grid-template-columns:1fr}header nav{display:none}.hero::after{width:22%}}
+@media (max-width:480px){.askeleet,.kaksi{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="palkki"><div class="leveys"><img src="data:image/png;base64,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" alt="Joensuun Maila"><nav><a href="#ohje">Näin toimit</a><a href="#lista">Älä kysy -lista</a><a href="#paketit">Paketit</a><a href="#ilmoita">Ilmoita yritys</a></nav></div></header>
+
+<div class="hero"><div class="leveys">
+<p class="yla">B-pojat · kumppanihankinta 2027</p>
+<h1>Löydä joukkueelle kumppani</h1>
+<p class="ingressi">Tarkista lista, ota yhteyttä tuttuun yritykseen ja ilmoita kiinnostunut yritys lomakkeella. Joukkueenjohto hoitaa sopimukset ja laskutuksen.</p>
+<div class="luku"><b>1 000 € ≈ 40 €</b><span>säästö pelaajaa kohden kaudessa</span></div>
+</div></div>
+
+<section id="ohje" class="valkoinen"><div class="leveys">
+<p class="yla">Näin toimit</p><h2>Kolme askelta</h2>
+<p class="johdanto">Syksyn tärkein tavoite on saada peliasuihin kumppanit ja logot. Logot sovitaan joulu-tammikuussa, jotta peliasut ehditään tilata. <strong>Kaikki kumppanuudet ovat joukkueen yhteistyösopimuksia, ja tuki maksetaan seuralle joukkueen hyväksi.</strong></p>
+<div class="askeleet">
+<div class="askel"><h3>Tarkista lista</h3><p>Katso alta, onko yritys seuran kumppani tai jo mukana.</p></div>
+<div class="askel"><h3>Ota yhteyttä</h3><p>Kerro paketeista ja käytä viestipohjaa. Kysy rohkeasti, jos jokin mietityttää.</p></div>
+<div class="askel"><h3>Ilmoita yritys</h3><p>Kun yritys on kiinnostunut, täytä lomake. Joukkueenjohto hoitaa sopimuksen ja laskun.</p></div>
+</div></div></section>
+
+<section id="lista"><div class="leveys">
+<p class="yla">Älä kysy -lista</p><h2>Keneltä ei kannata kysyä</h2>
+<p class="johdanto">Lista päivittyy automaattisesti. Seuran kumppaneilta ja jo mukana olevilta yrityksiltä ei kysytä joukkueen puolesta.</p>
+<div id="listaSisalto">
+<div class="haku"><input id="haku" type="search" placeholder="Hae yritystä…" aria-label="Hae yritystä"><span id="maara" style="color:var(--harmaa);font-size:15px"></span></div>
+<div class="selite"><span class="tila t-seura">Seuran kumppani</span><span class="tila t-sovittu">Sovittu</span><span class="tila t-neuvottelussa">Neuvottelussa</span><span class="tila t-ei">Kysytty, ei tänä vuonna</span></div>
+<div class="lista" id="lista1"></div>
+</div>
+</div></section>
+
+<section id="paketit" class="valkoinen"><div class="leveys">
+<p class="yla">Mitä voi tarjota</p><h2>Kumppanipaketit ja ideat</h2>
+<p class="johdanto">Hinnat ovat ohjeellisia. Peliasujen painatus sisältyy hintaan, joukkue- ja treeniasujen painatus laskutetaan erikseen. Jos yritys haluaa jotain muuta, kirjaa toive lomakkeelle.</p>
+<p style="margin:0 0 24px"><a class="nappi" href="kumppaniesite-2027.pdf" target="_blank" rel="noopener" style="text-decoration:none">Lataa kumppaniesite yritykselle (PDF)</a></p>
+<div id="paketit1"><div class="tyhja">Ladataan paketteja…</div></div>
+</div></section>
+
+<section id="ilmoita"><div class="leveys">
+<p class="yla">Ilmoita</p><h2>Ilmoita kiinnostunut yritys</h2>
+<p class="johdanto">Täytä tiedot sen mukaan, mitä tiedät. Joukkueenjohto ottaa sinuun yhteyttä ja hoitaa loput.</p>
+<form class="lomake tumma" id="ilmo" novalidate style="max-width:720px">
+<label for="s_yritys">Yritys</label><input id="s_yritys" required maxlength="120">
+<div class="kaksi"><div><label for="s_paketti">Kiinnostava paketti</label><select id="s_paketti"><option value="">Ei vielä tiedossa</option></select></div><div><label for="s_summa">Summa (€, jos sovittu)</label><input id="s_summa" inputmode="numeric"></div></div>
+<div class="kaksi"><div><label for="s_yh">Yhteyshenkilö yrityksessä</label><input id="s_yh"></div><div><label for="s_yt">Yhteyshenkilön puhelin tai sähköposti</label><input id="s_yt"></div></div>
+<div class="kaksi"><div><label for="s_nimi">Oma nimesi</label><input id="s_nimi" required autocomplete="name"></div><div><label for="s_email">Oma sähköposti tai puhelin</label><input id="s_email" autocomplete="email"></div></div>
+<label for="s_lisa">Lisätiedot (valinnainen)</label><textarea id="s_lisa" maxlength="500" placeholder="Esim. mitä yritys toivoo, laskutustiedot tai logon toimitus"></textarea>
+<div style="position:absolute;left:-9999px" aria-hidden="true"><label for="s_hp">Älä täytä</label><input id="s_hp" tabindex="-1" autocomplete="off"></div>
+<button class="nappi puna" type="submit">Lähetä ilmoitus</button><div class="ilmo" id="ilmoIlmo"></div>
+</form></div></section>
+
+<section id="viesti" class="valkoinen"><div class="leveys">
+<p class="yla">Apuvälineet</p><h2>Viestipohja yritykselle</h2>
+<p class="johdanto">Muokkaa viestiä vapaasti ja lähetä se sähköpostilla, viestillä tai LinkedInissä. Henkilökohtainen kysymys toimii parhaiten.</p>
+<div class="pohja" id="pohja">Hei [nimi],
+
+poikani pelaa Joensuun Mailan B-pojissa, ja etsimme joukkueelle yhteistyökumppaneita kaudelle 2027. Joukkue pelaa kesällä neljässä sarjassa, mukaan lukien poikien superpesis, ja kotiotteluita pelataan Joensuussa koko kesän.
+
+Kumppanina yrityksenne voi saada esimerkiksi logon peliasuun tai joukkueasuun, kummipelaajan, ottelupallomainoksen tai vaikka TyHy-illan JoMa Centerissä. Tuki menee suoraan junioreiden harrastukseen ja pienentää perheiden kustannuksia.
+
+Voisinko kertoa vaihtoehdoista tarkemmin? Seura hoitaa sopimuksen ja laskutuksen, joten teiltä ei tarvita muuta kuin päätös ja logo.
+
+Terveisin
+[oma nimi]
+[puhelin]</div>
+<button class="nappi" id="kopioi">Kopioi viesti</button><span id="kopioitu" style="margin-left:12px;color:var(--vihr);font-weight:700" hidden>Kopioitu</span>
+<div class="vinkit">
+<div class="vinkki"><h3>Aloita läheltä</h3><p>Oma työpaikka, yritykset joiden asiakas olet, sukulaisten ja tuttujen yritykset.</p></div>
+<div class="vinkki"><h3>Tarjoa kokemus</h3><p>Kaikki eivät halua logoa. Ilta JoMa Centerissä, talkoot tai ottelupallo voivat olla helpompi kyllä.</p></div>
+<div class="vinkki"><h3>Älä jää yksin</h3><p>Jos yritys kysyy jotain, mihin et osaa vastata, ohjaa kysymys joukkueenjohdolle.</p></div>
+</div>
+</div></section>
+
+<section id="ukk"><div class="leveys">
+<p class="yla">Kysymyksiä</p><h2>Usein kysyttyä</h2>
+<details><summary>Kuka tekee sopimuksen ja laskun?</summary><p>Joukkueenjohto tekee sopimuksen ja seura laskuttaa yritystä. Sinun tehtäväsi on löytää kiinnostunut yritys ja ilmoittaa siitä lomakkeella.</p></details>
+<details><summary>Mitä teen, jos yritys on listalla?</summary><p>Valitse toinen yritys. Jos sinulla on yritykseen erityinen yhteys, kerro siitä joukkueenjohdolle ennen yhteydenottoa.</p></details>
+<details><summary>Voiko hinnasta tai sisällöstä sopia toisin?</summary><p>Paketit ovat ohjeellisia. Kirjaa yrityksen toive lomakkeen lisätietoihin, niin joukkueenjohto sopii yksityiskohdat.</p></details>
+<details><summary>Millainen logo tarvitaan?</summary><p>Mieluiten vektorimuodossa (SVG, EPS tai PDF). Peliasujen logot on saatava tammikuuhun mennessä.</p></details>
+</div></section>
+
+<footer><div class="leveys"><img src="data:image/png;base64,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" alt=""><div><b>Joensuun Maila · B-pojat</b>Kysyttävää: Vellu, <a href="tel:+358505733021">050 573 3021</a></div></div></footer>
+
+<script>
+// Liitä tähän kumppanuustaulukon Apps Script -verkkosovelluksen /exec-osoite
+const API_URL = 'LIITÄ_EXEC_OSOITE_TÄHÄN';
+const DEMO = API_URL.indexOf('LIITÄ') === 0;
+const $ = s => document.querySelector(s);
+const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let LISTA = [];
+const TILALUOKKA = {'Seuran kumppani':'t-seura','Sovittu':'t-sovittu','Neuvottelussa':'t-neuvottelussa','Kysytty, ei tänä vuonna':'t-ei'};
+const DEMODATA = {ok:true,lista:[{yritys:'Esimerkki Oy',tila:'Seuran kumppani',huom:'Seuran yhteistyökumppani'},{yritys:'Sähkö-Saarelainen',tila:'Sovittu'},{yritys:'Testiyritys Ky',tila:'Neuvottelussa'}],
+  paketit:[{nimi:'Peliasun logo',ryhma:'Painatukset',hinta:'Sovitaan',sisalto:'Logo kauden 2027 peliasuun. Painatus sisältyy hintaan.'},{nimi:'Joukkueasun logo',ryhma:'Painatukset',hinta:'Sovitaan',sisalto:'Painatus laskutetaan erikseen.'},{nimi:'Treenipaidan logo',ryhma:'Painatukset',hinta:'Sovitaan',sisalto:'Painatus laskutetaan erikseen.'},{nimi:'Kummipelaaja',ryhma:'Muut',hinta:'250 €',sisalto:'Yritys tukee joukkuetta kummipelaajan nimissä. Tuki maksetaan joukkueelle.'},{nimi:'Ottelupallo',ryhma:'Muut',hinta:'125-150 €',sisalto:'Kuulutus kotiottelussa.'},{nimi:'Palkinnot otteluihin',ryhma:'Muut',hinta:'Tuotepalkinto',sisalto:'Otteluiden parhaiden palkinnot.'},{nimi:'Ilta JoMa Centerissä',ryhma:'Muut',hinta:'1 000 €',sisalto:'TyHy, pikkujoulut tai saunailta: pesäpallo, sauna ja poreallas.'},{nimi:'Talkoot yritykselle',ryhma:'Muut',hinta:'Sovitaan',sisalto:'Inventointi, lumityöt tai paketointi.'},{nimi:'Vapaavalintainen tuki',ryhma:'Muut',hinta:'Alkaen 100 €',sisalto:'Tuki haluamalla summalla.'}]};
+function piirraLista() {
+  const q = $('#haku').value.trim().toLowerCase();
+  const l = LISTA.filter(x => !q || x.yritys.toLowerCase().includes(q));
+  $('#maara').textContent = l.length + ' / ' + LISTA.length + ' yritystä';
+  $('#lista1').innerHTML = l.length ? l.map(x => '<div class="rivi"><div><span class="nimi">' + esc(x.yritys) + '</span>' + (x.huom ? '<small>' + esc(x.huom) + '</small>' : '') + '</div><span class="tila ' + (TILALUOKKA[x.tila] || 't-ei') + '">' + esc(x.tila) + '</span></div>').join('')
+    : '<div class="tyhja">' + (q ? 'Ei osumia. Yritykseltä voi kysyä.' : 'Lista on tyhjä.') + '</div>';
+}
+function piirraPaketit(p) {
+  const ryhmat = []; p.forEach(x => { const r = x.ryhma || 'Muut'; if (ryhmat.indexOf(r) < 0) ryhmat.push(r); });
+  const nimet = {Painatukset:'Painatukset: logo asuun', Muut:'Muut kumppanuudet ja ideat'};
+  $('#paketit1').innerHTML = ryhmat.map(r => '<div class="ryhmaots">' + esc(nimet[r] || r) + '</div><div class="paketit">' +
+    p.filter(x => (x.ryhma || 'Muut') === r).map(x => '<div class="paketti"><h3>' + esc(x.nimi) + '</h3><span class="hinta">' + esc(x.hinta) + '</span><p>' + esc(x.sisalto) + '</p></div>').join('') + '</div>').join('');
+  const s = $('#s_paketti'); s.length = 1; p.forEach(x => s.add(new Option(x.nimi + ' (' + x.hinta + ')', x.nimi))); s.add(new Option('Muu, ks. lisätiedot', 'Muu'));
+}
+async function lataa() {
+  try {
+    const d = DEMO ? DEMODATA : await (await fetch(API_URL)).json();
+    if (!d.ok) throw new Error(d.virhe);
+    LISTA = d.lista || []; piirraLista(); piirraPaketit(d.paketit || []);
+  } catch (e) { $('#lista1').innerHTML = '<div class="tyhja">Listaa ei saatu ladattua. Yritä hetken päästä uudelleen.</div>'; }
+}
+$('#haku').oninput = piirraLista;
+$('#ilmo').onsubmit = async e => {
+  e.preventDefault();
+  const ilmo = $('#ilmoIlmo'), v = id => $(id).value.trim();
+  ilmo.className = 'ilmo';
+  const data = {yritys:v('#s_yritys'), paketti:v('#s_paketti'), summa:v('#s_summa'), yhteyshenkilo:v('#s_yh'), yhteystiedot:v('#s_yt'), nimi:v('#s_nimi'), email:v('#s_email'), lisatiedot:v('#s_lisa'), puhelinnumero2:v('#s_hp')};
+  if (!data.yritys || !data.nimi) { ilmo.className = 'ilmo virhe'; ilmo.textContent = 'Täytä yritys ja oma nimesi.'; return; }
+  const b = e.target.querySelector('button'); b.disabled = true;
+  try {
+    const r = DEMO ? {ok:true, viesti:'Esikatselu: ilmoitusta ei tallennettu, koska API_URL puuttuu.'}
+      : await (await fetch(API_URL, {method:'POST', headers:{'Content-Type':'text/plain;charset=utf-8'}, body:JSON.stringify(data)})).json();
+    if (!r.ok) throw new Error(r.virhe);
+    ilmo.className = 'ilmo ok'; ilmo.textContent = r.viesti; e.target.reset(); if (!DEMO) lataa();
+  } catch (err) { ilmo.className = 'ilmo virhe'; ilmo.textContent = err.message || 'Lähetys epäonnistui. Yritä uudelleen.'; }
+  b.disabled = false;
+};
+$('#kopioi').onclick = () => { navigator.clipboard.writeText($('#pohja').innerText).then(() => { $('#kopioitu').hidden = false; setTimeout(() => $('#kopioitu').hidden = true, 2500); }); };
+lataa();
+</script>
+</body>
+</html>
