@@ -175,7 +175,7 @@ Terveisin
 
 <script>
 // Liitä tähän kumppanuustaulukon Apps Script -verkkosovelluksen /exec-osoite
-const API_URL = https://script.google.com/macros/s/AKfycbw_0DG6JGoMqWQQUHeYbXcvUrhdMG9c11NyoAL_-gLcw81qNAOA4RK2Qor84BLpesyJxw/exec;
+const API_URL = 'https://script.google.com/macros/s/AKfycbw_0DG6JGoMqWQQUHeYbXcvUrhdMG9c11NyoAL_-gLcw81qNAOA4RK2Qor84BLpesyJxw/exec';
 const DEMO = API_URL.indexOf('LIITÄ') === 0;
 const $ = s => document.querySelector(s);
 const esc = s => String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -197,12 +197,29 @@ function piirraPaketit(p) {
     p.filter(x => (x.ryhma || 'Muut') === r).map(x => '<div class="paketti"><h3>' + esc(x.nimi) + '</h3><span class="hinta">' + esc(x.hinta) + '</span><p>' + esc(x.sisalto) + '</p></div>').join('') + '</div>').join('');
   const s = $('#s_paketti'); s.length = 1; p.forEach(x => s.add(new Option(x.nimi + ' (' + x.hinta + ')', x.nimi))); s.add(new Option('Muu, ks. lisätiedot', 'Muu'));
 }
+function jsonp(url) {
+  return new Promise((ok, ei) => {
+    const nimi = 'jomaCb' + Date.now(), s = document.createElement('script');
+    const aika = setTimeout(() => { siivoa(); ei(new Error('Aikakatkaisu')); }, 15000);
+    function siivoa() { clearTimeout(aika); delete window[nimi]; s.remove(); }
+    window[nimi] = d => { siivoa(); ok(d); };
+    s.onerror = () => { siivoa(); ei(new Error('Yhteys verkkosovellukseen epäonnistui')); };
+    s.src = url + (url.indexOf('?') < 0 ? '?' : '&') + 'callback=' + nimi + '&t=' + Date.now();
+    document.body.appendChild(s);
+  });
+}
 async function lataa() {
   try {
-    const d = DEMO ? DEMODATA : await (await fetch(API_URL)).json();
+    let d;
+    if (DEMO) d = DEMODATA;
+    else { try { d = await (await fetch(API_URL)).json(); } catch (e) { console.warn('fetch epäonnistui, kokeillaan JSONP', e); d = await jsonp(API_URL); } }
     if (!d.ok) throw new Error(d.virhe);
     LISTA = d.lista || []; piirraLista(); piirraPaketit(d.paketit || []);
-  } catch (e) { $('#lista1').innerHTML = '<div class="tyhja">Listaa ei saatu ladattua. Yritä hetken päästä uudelleen.</div>'; }
+  } catch (e) {
+    console.error(e);
+    $('#lista1').innerHTML = '<div class="tyhja">Listaa ei saatu ladattua. Yritä hetken päästä uudelleen.<br><small style="color:#999">' + esc(e.message) + '</small></div>';
+    $('#paketit1').innerHTML = '<div class="tyhja">Paketteja ei saatu ladattua.</div>';
+  }
 }
 $('#haku').oninput = piirraLista;
 $('#ilmo').onsubmit = async e => {
